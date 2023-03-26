@@ -6,18 +6,18 @@ import android.widget.TextView
 
 class ResultadoActivity : AppCompatActivity() {
 
-    lateinit var tvPeso: TextView
-    lateinit var tvAltura: TextView
-    lateinit var tvResultado: TextView
+    private lateinit var tvPeso: TextView
+    private lateinit var tvAltura: TextView
+    private lateinit var tvResultado: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultado)
 
-        tvPeso = findViewById(R.id.tvPeso)
-        tvAltura = findViewById(R.id.tvAltura)
-        tvResultado = findViewById(R.id.tvResultado)
+        tvPeso = findViewById(R.id.tv_peso)
+        tvAltura = findViewById(R.id.tv_altura)
+        tvResultado = findViewById(R.id.tv_resultado)
 
         val bundle = intent.extras
 
@@ -36,19 +36,19 @@ class ResultadoActivity : AppCompatActivity() {
 
     }
 
-    fun imc(resultado: Double): String{
-        if(resultado < 18.5){
-            return "Abaixo do peso"
-        }else if(resultado >= 18.5 && resultado <= 24.9){
-            return "Peso normal"
-        }else if(resultado >= 25 && resultado <= 29.9){
-            return "Acima do peso (sobrepeso)"
-        }else if(resultado >= 30 && resultado <= 34.9){
-            return "Obesidade I"
-        }else if(resultado >= 35 && resultado <= 39.9){
-            return "Obesidade II"
+    private fun imc(resultado: Double): String{
+        return if(resultado < 18.5){
+            "Abaixo do peso"
+        }else if(resultado in 18.5..24.9){
+            "Peso normal"
+        }else if(resultado in 25.0..29.9){
+            "Acima do peso (sobrepeso)"
+        }else if(resultado in 30.0..34.9){
+            "Obesidade I"
+        }else if(resultado in 35.0..39.9){
+            "Obesidade II"
         }else{
-            return "Obesidade III"
+            "Obesidade III"
         }
     }
 }
